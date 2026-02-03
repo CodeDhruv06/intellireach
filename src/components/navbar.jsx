@@ -11,6 +11,7 @@ export function Navbar({ loading = false }) {
     const [menuOpen, setMenuOpen] = useState(false);
     const navigate = useNavigate();
 
+    // logo Animation
     useEffect(() => {
         if (loading === true) return; // wait until content is shown
         const el = titleRef.current;
@@ -43,21 +44,33 @@ export function Navbar({ loading = false }) {
 
         return () => ctx.revert();
     }, [loading]);
+
+
+    //navbar items animation
     useEffect(() => {
         if (loading) return;
         const navbar = navbarRef.current;
         if (!navbar) return;
-        gsap.fromTo(navbar, {
-            y: -100,
+        const navItems = navbar.querySelectorAll('span');
+        gsap.fromTo(navItems, {
+            y: -50,
             opacity: 0,
         }, {
-            delay: 2.5,
+            delay: 1.8,
             y: 0,
             opacity: 1,
-            duration: 1,
-            ease: "power3.out",
+            duration: 0.8,
+            ease: "power2.out",
+            stagger: 0.1,
+            overwrite: "auto",
+            clearProps: "transform",
+            onComplete: () => {
+                gsap.set(navItems, { clearProps: "all" });
+            }
         });
     }, [loading]);
+
+    // Mobile Drawer Animation
     useEffect(() => {
         const el = drawerRef.current;
         if (!el) return;
@@ -76,6 +89,8 @@ export function Navbar({ loading = false }) {
             });
         }
     }, [menuOpen]);
+    
+    
 
     return (
         <>
@@ -102,7 +117,7 @@ export function Navbar({ loading = false }) {
                 {/* Hamburger (mobile only) */}
                 <button
                     onClick={() => setMenuOpen(true)}
-                    className="md:hidden fixed top-8 right-5 z-40 text-white"
+                    className="md:hidden fixed backdrop-blur-md top-8 right-5 z-40 text-white"
                 >
                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" >
                         <line x1="3" y1="6" x2="21" y2="6" stroke="white" strokeWidth="2" />

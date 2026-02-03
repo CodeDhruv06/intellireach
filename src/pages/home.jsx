@@ -7,6 +7,8 @@ export default function Home() {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const revealOverlayRef = useRef(null);
+    const maintitleref = useRef(null);
+    const subtitleref = useRef(null);
     useEffect(() => {
         if (loading) return;
         const overlay = revealOverlayRef.current;
@@ -28,6 +30,41 @@ export default function Home() {
             },
         });
     }, [loading]);
+
+    //main title animation
+    useEffect(() => {
+        if (loading === true) return;
+        const el = maintitleref.current;
+        if (!el) return;
+        gsap.fromTo(el, {
+            y: -50,
+            opacity: 0,
+        }, {
+            delay: 2.3,
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: "power2.out",
+            stagger: 0.1,
+        })
+    }, [loading])
+
+    //subtitle animation
+    useEffect(() => {
+        if (loading === true) return;
+        const e = subtitleref.current;
+        if (!e) return;
+        gsap.fromTo(e, {
+            y: 50,
+            opacity: 0,
+        }, {
+            delay: 2.7,
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: "power2.out",
+        })
+    }, [loading])
 
     if (loading) {
         return (
@@ -52,24 +89,25 @@ export default function Home() {
                     />
                     {/* gradient overlay */}
                     {/* <div className="absolute inset-0 z-10 bg-gradient-to-br from-blue-500/20 via-transparent to-black pointer-events-none" /> */}
-                    <div className="p-6 relative font-manrope font-bold mt-16 tracking-tight text-7xl flex w-full bg-gradient-to-r from-white via-white via-gray-200 to-gray-400 bg-clip-text text-transparent justify-center z-30">
-                        <div className="">Transform Your Digital Presence</div>
+                    <div ref={maintitleref} className="p-6 relative font-manrope font-bold mt-16 tracking-tight text-7xl flex w-full bg-gradient-to-r from-white via-white via-gray-200 to-gray-400 bg-clip-text text-transparent justify-center z-30">
+                        <div className="" >Transform Your Digital Presence</div>
                     </div>
-                    <p className="p-6 font-inter relative mt-2 md:mx-16 text-2xl text-white text-center leading-snug z-30">
+                    <p ref={subtitleref} className="p-6 font-inter relative mt-2 md:mx-16 text-2xl text-white text-center leading-snug z-30">
                         We build high-impact digital solutions with modern web development, smart SEO, powerful
-                        <br/>
-                         content, and visually striking design that delivers measurable growth.
+                        <br />
+                        content, and visually striking design that delivers measurable growth.
                     </p>
                     <div className="flex gap-8 justify-center items-center">
-                    <button className="hover:drop-shadow-[0_0_10px_rgba(0,255,255,0.7)] flex rounded-[35px] z-30 relative font-inter p-4 pl-5 mt-4 bg-gradient-to-r from-cyan-400 to-cyan-500 text-black transition-transform duration-200 font-bold rounded-lg hover:bg-blue-700 transition hover:scale-110 ">Get Started   <svg className='pl-2' xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000ff"><path d="m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z"/></svg></button>
-                    <button className="hover:drop-shadow-[0_0_10px_rgba(0,255,255,0.7)] z-30 flex bg-[#020e14] rounded-[32px] text-cyan-500 font-bold border border-cyan-500 transition-transform duration-200 hover:scale-110 mt-4 p-4 pl-5">Learn More<svg className='pl-1'xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ffffffff"><path d="M440-280h80v-240h-80v240Zm40-320q17 0 28.5-11.5T520-640q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640q0 17 11.5 28.5T480-600Zm0 520q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg></button>
+                        <button className="hover:drop-shadow-[0_0_10px_rgba(0,255,255,0.7)] flex rounded-[36px] z-30 relative font-inter p-4 pl-5 mt-4 bg-gradient-to-r from-cyan-400 to-cyan-500 text-black transition-transform duration-200 font-bold rounded-lg hover:bg-blue-700 transition hover:scale-110 ">Get Started   <svg className='pl-2' xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000ff"><path d="m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z" /></svg></button>
+                        <button className="hover:drop-shadow-[0_0_10px_rgba(0,255,255,0.7)] z-30 flex bg-[#020e14] rounded-[32px] text-cyan-500 font-bold border border-cyan-500 transition-transform duration-200 hover:scale-110 mt-4 p-4 pl-5">Learn More<svg className='pl-1' xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ffffffff"><path d="M440-280h80v-240h-80v240Zm40-320q17 0 28.5-11.5T520-640q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640q0 17 11.5 28.5T480-600Zm0 520q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z" /></svg></button>
                     </div>
-
-
+                    <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black via-black/50 to-transparent pointer-events-none z-20"></div>
+                    <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent via-black/80 to-black pointer-events-none z-20"></div>
                 </div>
+
             </section>
             <section>
-                <div className="w-full min-h-screen">hello</div>
+                <div className="w-full min-h-screen bg-gradient-to-b from-black via-blue-950 to-slate-900">hello</div>
 
             </section>
         </>

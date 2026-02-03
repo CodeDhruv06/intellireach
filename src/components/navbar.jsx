@@ -4,6 +4,9 @@ import gsap from "gsap";
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+// Module-level variable - persists across re-renders/navigation but resets on page refresh
+let hasAnimatedOnce = false;
+
 export function Navbar({ loading = false }) {
     const titleRef = useRef(null);
     const drawerRef = useRef(null);
@@ -11,11 +14,25 @@ export function Navbar({ loading = false }) {
     const [menuOpen, setMenuOpen] = useState(false);
     const navigate = useNavigate();
 
-    // logo Animation
+    // logo Animation - runs only once
     useEffect(() => {
         if (loading === true) return; // wait until content is shown
         const el = titleRef.current;
         if (!el) return;
+        
+        // Skip animation if already animated
+        if (hasAnimatedOnce) {
+            gsap.set(el, {
+                position: 'relative',
+                top: 'auto',
+                left: 'auto',
+                xPercent: 0,
+                yPercent: 0,
+                scale: 1.2,
+            });
+            return;
+        }
+        
         const a = window.innerWidth;
         const isMobile = window.matchMedia('(max-width: 767px)').matches;
         // Scope animations to this element and clean up on unmount
@@ -39,6 +56,9 @@ export function Navbar({ loading = false }) {
                 xPercent: 0,
                 yPercent: 0,
                 scale: 1.2,
+                onComplete: () => {
+                    hasAnimatedOnce = true;
+                }
             });
         }, el);
 
@@ -46,12 +66,19 @@ export function Navbar({ loading = false }) {
     }, [loading]);
 
 
-    //navbar items animation
+    //navbar items animation - runs only once
     useEffect(() => {
         if (loading) return;
         const navbar = navbarRef.current;
         if (!navbar) return;
         const navItems = navbar.querySelectorAll('span');
+        
+        // Skip animation if already animated
+        if (hasAnimatedOnce) {
+            gsap.set(navItems, { y: 0, opacity: 1 });
+            return;
+        }
+        
         gsap.fromTo(navItems, {
             y: -50,
             opacity: 0,
@@ -94,7 +121,7 @@ export function Navbar({ loading = false }) {
 
     return (
         <>
-            <div className='flex items-center justify-between px-4 py-3 md:py-4'>
+            <div className='bg-black flex items-center justify-between px-4 py-3 md:py-4'>
                 <div
                     onClick={() => { navigate('/') }}
                     ref={titleRef}
@@ -112,7 +139,7 @@ export function Navbar({ loading = false }) {
                     <span className='hover:rotate-6 hover:text-cyan-400 cursor-pointer transition hover:scale-110' onClick={() => { navigate('/contact') }}>Contact</span>
                 </nav>
                 <div className='hidden md:block text-md mt-3 pr-4 z-40'>
-                    <button className='hover:scale-110 hover:drop-shadow-[0_0_10px_rgba(0,255,255,0.7)] px-6 py-2 rounded-full text-white border border-b-4 drop-shadow-[0_0_4px_rgba(0,255,255,0.7)] border-cyan-500 hover:bg-white/5 transition'>Get In Touch</button>
+                    <button onClick={() => navigate('/contact')} className='hover:scale-110 hover:drop-shadow-[0_0_10px_rgba(0,255,255,0.7)] px-6 py-2 rounded-full text-white border border-b-4 drop-shadow-[0_0_4px_rgba(0,255,255,0.7)] border-cyan-500 hover:bg-white/5 transition'>Get In Touch</button>
                 </div>
                 {/* Hamburger (mobile only) */}
                 <button

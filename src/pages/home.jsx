@@ -64,8 +64,12 @@ export default function Home() {
         // Skip animation if already played
         if (hasRevealedOnce) {
             gsap.set(overlay, { display: "none", opacity: 0 });
+            document.body.style.overflow = 'auto';
             return;
         }
+
+        // Disable scroll during overlay animation
+        document.body.style.overflow = 'hidden';
 
         gsap.set(overlay, {
             opacity: 1,
@@ -81,6 +85,8 @@ export default function Home() {
             onComplete: () => {
                 gsap.set(overlay, { display: "none" });
                 hasRevealedOnce = true;
+                // Re-enable scroll after animation
+                document.body.style.overflow = 'auto';
             },
         });
     }, []);
@@ -170,43 +176,43 @@ export default function Home() {
     return (
         <>
             <section>
-                <div className="relative min-h-screen overflow-hidden bg-black">
+                <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-gray-50 via-white to-blue-50">
                     <div
                         ref={revealOverlayRef}
-                        className="fixed inset-0 z-40 bg-black pointer-events-none"
+                        className="fixed inset-0 z-40 bg-white pointer-events-none"
                     />
                     <img
                         src="main.jpg"
                         alt="background"
-                        className="absolute inset-0 w-full h-full object-cover opacity-35 z-0"
+                        className="absolute inset-0 w-full h-full object-cover opacity-60 z-0"
                     />
                     {/* gradient overlay */}
-                    {/* <div className="absolute inset-0 z-10 bg-gradient-to-br from-blue-500/20 via-transparent to-black pointer-events-none" /> */}
-                    <div ref={maintitleref} className="p-6 relative font-manrope font-bold mt-16 tracking-tight text-7xl flex w-full bg-gradient-to-r from-white via-white via-gray-200 to-gray-400 bg-clip-text text-transparent justify-center z-30">
+                    <div className="absolute inset-0 z-10 bg-gradient-to-br from-white/40 via-transparent to-blue-100/30 pointer-events-none" />
+                    <div ref={maintitleref} className="p-6 relative font-manrope font-bold mt-16 tracking-tight text-7xl flex w-full bg-gradient-to-r from-gray-800 via-gray-700 to-blue-600 bg-clip-text text-transparent justify-center z-30">
                         <div className="" >Transform Your Digital Presence</div>
                     </div>
-                    <p ref={subtitleref} className="p-6 font-inter relative mt-2 md:mx-16 text-2xl text-white text-center leading-snug z-30">
+                    <p ref={subtitleref} className="p-6 font-inter relative mt-2 md:mx-16 text-2xl text-gray-600 text-center leading-snug z-30">
                         We build high-impact digital solutions with modern web development, smart SEO, powerful
                         <br />
                         content, and visually striking design that delivers measurable growth.
                     </p>
                     <div className="flex gap-8 justify-center items-center">
-                        <button className="hover:drop-shadow-[0_0_10px_rgba(0,255,255,0.7)] flex rounded-[36px] z-30 relative font-inter p-4 pl-5 mt-4 bg-gradient-to-r from-cyan-400 to-cyan-500 text-black transition-transform duration-200 font-bold hover:bg-blue-700 transition hover:scale-110 ">Get Started   <svg className='pl-2' xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000ff"><path d="m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z" /></svg></button>
-                        <button className="hover:drop-shadow-[0_0_10px_rgba(0,255,255,0.7)] z-30 flex bg-[#020e14] rounded-[32px] text-cyan-500 font-bold border border-cyan-500 transition-transform duration-200 hover:scale-110 mt-4 p-4 pl-5">Learn More<svg className='pl-1' xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ffffffff"><path d="M440-280h80v-240h-80v240Zm40-320q17 0 28.5-11.5T520-640q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640q0 17 11.5 28.5T480-600Zm0 520q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z" /></svg></button>
+                        <button className="hover:drop-shadow-[0_0_15px_rgba(59,130,246,0.5)] flex rounded-[36px] z-30 relative font-inter p-4 pl-5 mt-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white transition-transform duration-200 font-bold shadow-lg shadow-blue-300/50 hover:shadow-blue-400/60 transition hover:scale-110 ">Get Started   <svg className='pl-2' xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ffffff"><path d="m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z" /></svg></button>
+                        <button className="hover:drop-shadow-[0_0_15px_rgba(59,130,246,0.4)] z-30 flex bg-white/80 backdrop-blur-sm rounded-[32px] text-blue-600 font-bold border border-blue-400 shadow-lg transition-transform duration-200 hover:scale-110 mt-4 p-4 pl-5 hover:bg-white">Learn More<svg className='pl-1' xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#2563eb"><path d="M440-280h80v-240h-80v240Zm40-320q17 0 28.5-11.5T520-640q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640q0 17 11.5 28.5T480-600Zm0 520q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z" /></svg></button>
                     </div>
 
                     {/* Animated Scroll Indicator */}
                     <div className="flex flex-col items-center justify-center mt-4 z-30 relative">
                         <span className="text-gray-400 text-sm font-inter mb-2 tracking-wider"></span>
-                        <div className="w-6 h-10 border-2 border-cyan-400/60 rounded-full flex justify-center p-1">
-                            <div className="w-1.5 h-3 bg-cyan-400 rounded-full animate-bounce"
+                        <div className="w-6 h-10 border-2 border-blue-400/60 rounded-full flex justify-center p-1 bg-white/50 backdrop-blur-sm">
+                            <div className="w-1.5 h-3 bg-blue-500 rounded-full animate-bounce"
                                 style={{
                                     animation: "scrollBounce 1.5s ease-in-out infinite"
                                 }}
                             />
                         </div>
                         <svg
-                            className="mt-2 text-cyan-400/60 animate-pulse"
+                            className="mt-2 text-blue-400/60 animate-pulse"
                             width="20"
                             height="20"
                             viewBox="0 0 24 24"
@@ -231,42 +237,45 @@ export default function Home() {
                         }
                     `}</style>
 
-                    <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black via-black/50 to-transparent pointer-events-none z-20"></div>
-                    <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent via-black/80 to-black pointer-events-none z-20"></div>
+                    <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white via-white/50 to-transparent pointer-events-none z-20"></div>
+                    <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent via-gray-100/80 to-gray-100 pointer-events-none z-20"></div>
                 </div>
 
             </section>
             <section ref={section2Ref}>
-                <div className="w-full min-h-screen bg-black text-white relative">
+                <div className="w-full min-h-screen bg-white text-gray-800 relative">
                     {/* GridMotion as background */}
-                    <div className="absolute inset-0 z-0">
-                        <GridMotion items={items} gradientColor="black" />
+                    <div className="absolute inset-0 z-0 opacity-30">
+                        <GridMotion items={items} gradientColor="white" />
                     </div>
 
                     {/* Content overlay */}
                     <div className="relative z-10 flex min-h-screen pointer-events-none">
                         <div className="mt-20 ml-12 md:mt-28 md:ml-20 pointer-events-auto">
                             <div ref={section2title}>
-                                <h2 className="text-5xl font-bold">Design That Speaks.</h2>
-                                <h2 className="text-5xl font-bold mb-12">Delivery That Converts.</h2>
+                                <h2 className="text-5xl font-bold text-gray-800">Design That Speaks.</h2>
+                                <h2 className="text-5xl font-bold mb-12 bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">Delivery That Converts.</h2>
                             </div>
                             <div ref={section2subtitle}>
-                            <p className="font-inter mt-4 w-[40vw] text-xl mb-2 text-gray-300">Crafting Digital Success Stories Since 2022. Today, we're proud to be a trusted partner for companies worldwide. </p>
-                            <p className="font-inter mt-4 w-[48vw] text-xl text-gray-300"> Our team blends technical expertise with creative vision to deliver solutions that not only look stunning but also drive measurable business growth.</p>
+                            <p className="font-inter mt-4 w-[40vw] text-xl mb-2 text-gray-600">Crafting Digital Success Stories Since 2022. Today, we're proud to be a trusted partner for companies worldwide. </p>
+                            <p className="font-inter mt-4 w-[48vw] text-xl text-gray-600"> Our team blends technical expertise with creative vision to deliver solutions that not only look stunning but also drive measurable business growth.</p>
                             </div>
                             <div className="flex gap-4">
-                                <button onClick={() => { navigate('/about') }} className="ml-1 mt-12 flex text-black bg-white/80 px-6 py-1 rounded-lg transition-transform duration-300 hover:scale-110 hover:bg-white/50">About Us</button>
-                                <button onClick={() => { navigate('/services') }} className="text-white mt-12 bg-white/30 px-6 py-1 rounded-lg transition-transform duration-300 hover:scale-110 hover:bg-white/10">Our Work</button>
+                                <button onClick={() => { navigate('/about') }} className="ml-1 mt-12 flex text-white bg-gradient-to-r from-blue-500 to-cyan-500 px-6 py-2 rounded-lg transition-transform duration-300 hover:scale-110 shadow-lg shadow-blue-300/40">About Us</button>
+                                <button onClick={() => { navigate('/services') }} className="text-blue-600 mt-12 bg-white/80 backdrop-blur-sm border border-blue-300 px-6 py-2 rounded-lg transition-transform duration-300 hover:scale-110 shadow-lg hover:bg-white">Our Work</button>
                             </div>
                         </div>
                     </div>
+                    <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-gray-100 via-gray-100/80 to-transparent pointer-events-none z-20"></div>
+                    <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent via-gray-100/80 to-gray-100 pointer-events-none z-20"></div>
+                
                 </div>
             </section>
             <section>
-                <div className="bg-black min-h-screen w-full flex flex-col justify-center items-center">
-                    <div className="flex w-full justify-center gap-4 items-center pt-16 text-white text-5xl md:text-7xl font-semibold">
+                <div className="bg-gradient-to-br from-gray-100 via-gray-100/80 to-blue-50 min-h-screen w-full flex flex-col justify-center items-center">
+                    <div className="flex w-full justify-center gap-4 items-center pt-16 text-gray-800 text-5xl md:text-7xl font-semibold">
                         <span>More</span>
-                        <span className="font-manrope font-bold">Coming Soon...</span>
+                        <span className="font-manrope font-bold bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent">Coming Soon...</span>
                     </div>
                 </div>
             </section>

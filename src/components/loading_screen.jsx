@@ -29,10 +29,11 @@ export default function LoadingScreen({ onComplete }) {
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="fixed inset-0 z-[100] bg-[#030712] flex flex-col items-center justify-center"
+      className="fixed inset-0 z-[100] bg-gradient-to-br from-gray-50 via-white to-blue-50 flex flex-col items-center justify-center"
     >
       {/* Background Glow */}
-      <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-cyan-500/20 rounded-full blur-[150px] -translate-x-1/2 -translate-y-1/2" />
+      <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-blue-400/20 rounded-full blur-[150px] -translate-x-1/2 -translate-y-1/2" />
+      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-cyan-400/15 rounded-full blur-[120px] translate-x-1/2 translate-y-1/2" />
       
       {/* Logo */}
       <motion.div
@@ -41,11 +42,11 @@ export default function LoadingScreen({ onComplete }) {
         transition={{ duration: 0.5 }}
         className="flex items-center gap-3 mb-12"
       >
-        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center">
+        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-blue-300/50">
           <span className="text-white font-bold text-xl">IR</span>
         </div>
-        <span className="text-2xl font-semibold text-white">
-          Intelli<span className="text-cyan-400">Reach</span>
+        <span className="text-2xl font-semibold text-gray-800">
+          Intelli<span className="bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent">Reach</span>
         </span>
       </motion.div>
 
@@ -87,7 +88,7 @@ export default function LoadingScreen({ onComplete }) {
         </div>
 
         {/* Progress Bar Background */}
-        <div className="relative h-1 w-64 bg-white/10 rounded-full overflow-visible">
+        <div className="relative h-1 w-64 bg-gray-200 rounded-full overflow-visible">
           <motion.div
             className="relative h-full bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full shadow-[0_0_12px_rgba(59,130,246,0.6),0_0_24px_rgba(59,130,246,0.4)]"
             style={{ width: `${progress}%` }}
@@ -106,7 +107,7 @@ export default function LoadingScreen({ onComplete }) {
         </div>
 
         {/* Loading Text */}
-        <p className="text-gray-500 text-sm text-center mt-4">
+        <p className="text-gray-400 text-sm text-center mt-4">
           Loading experience...
         </p>
       </div>
@@ -116,7 +117,7 @@ export default function LoadingScreen({ onComplete }) {
         {[...Array(3)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute top-1/2 left-1/2 w-2 h-2 bg-cyan-400/50 rounded-full"
+            className="absolute top-1/2 left-1/2 w-2 h-2 bg-blue-400/60 rounded-full shadow-lg shadow-blue-300/50"
             animate={{
               rotate: 360,
             }}

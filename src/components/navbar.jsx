@@ -121,35 +121,35 @@ export function Navbar({ loading = false }) {
 
     return (
         <>
-            <div className='bg-black flex items-center justify-between px-4 py-3 md:py-4'>
+            <div className='bg-gradient-to-b from-gray-300 via-gray-300/70 to-white flex items-center justify-between px-4 py-3 md:py-4 '>
                 <div
                     onClick={() => { navigate('/') }}
                     ref={titleRef}
-                    className="cursor-pointer fixed top-1/2 left-1/2 z-50 flex text-white font-bold text-3xl select-none md:static md:top-auto md:left-auto "
+                    className="cursor-pointer z-50 fixed top-1/2 left-1/2 flex text-gray-800 font-bold text-3xl select-none md:static md:top-auto md:left-auto "
                 >
                     <div> Intelli</div>
-                    <div className="bg-gradient-to-r from-cyan-400 to-cyan-500 bg-clip-text text-transparent "> Reach</div>
+                    <div className="bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent "> Reach</div>
                 </div>
-                <nav ref={navbarRef} className='hidden md:flex items-center mt-3 gap-9 z-30 text-white/80 text-lg flex-1 justify-center'>
+                <nav ref={navbarRef} className='hidden md:flex items-center mt-3 gap-9 z-30 text-gray-600 text-lg flex-1 justify-center'>
                     <span className='pl-56'></span>
-                    <span className='hover:rotate-6 hover:text-cyan-400 cursor-pointer transition' onClick={() => { navigate('/') }}>Home</span>
-                    <span className='hover:rotate-6 hover:text-cyan-400 cursor-pointer transition hover:scale-110' onClick={() => { navigate('/about') }}>About</span>
-                    <span className='hover:rotate-6 hover:text-cyan-400 cursor-pointer transition hover:scale-110' onClick={() => { navigate('/services') }}>Services</span>
-                    <span className='hover:rotate-6 hover:text-cyan-400 cursor-pointer transition hover:scale-110' onClick={() => { navigate('/blogs') }}>Blogs</span>
-                    <span className='hover:rotate-6 hover:text-cyan-400 cursor-pointer transition hover:scale-110' onClick={() => { navigate('/contact') }}>Contact</span>
+                    <span className='hover:rotate-6 hover:text-blue-500 cursor-pointer transition' onClick={() => { navigate('/') }}>Home</span>
+                    <span className='hover:rotate-6 hover:text-blue-500 cursor-pointer transition hover:scale-110' onClick={() => { navigate('/about') }}>About</span>
+                    <span className='hover:rotate-6 hover:text-blue-500 cursor-pointer transition hover:scale-110' onClick={() => { navigate('/services') }}>Services</span>
+                    <span className='hover:rotate-6 hover:text-blue-500 cursor-pointer transition hover:scale-110' onClick={() => { navigate('/blogs') }}>Blogs</span>
+                    <span className='hover:rotate-6 hover:text-blue-500 cursor-pointer transition hover:scale-110' onClick={() => { navigate('/contact') }}>Contact</span>
                 </nav>
                 <div className='hidden md:block text-md mt-3 pr-4 z-40'>
-                    <button onClick={() => navigate('/contact')} className='hover:scale-110 hover:drop-shadow-[0_0_10px_rgba(0,255,255,0.7)] px-6 py-2 rounded-full text-white border border-b-4 drop-shadow-[0_0_4px_rgba(0,255,255,0.7)] border-cyan-500 hover:bg-white/5 transition'>Get In Touch</button>
+                    <button onClick={() => navigate('/contact')} className='hover:scale-110 hover:drop-shadow-[0_0_10px_rgba(59,130,246,0.5)] px-6 py-2 rounded-full text-white bg-gradient-to-r from-blue-500 to-cyan-500 border-none shadow-lg hover:shadow-blue-300/50 transition'>Get In Touch</button>
                 </div>
                 {/* Hamburger (mobile only) */}
                 <button
                     onClick={() => setMenuOpen(true)}
-                    className="md:hidden fixed backdrop-blur-md top-8 right-5 z-40 text-white"
+                    className="md:hidden fixed backdrop-blur-md top-8 right-5 z-40 text-gray-800"
                 >
                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" >
-                        <line x1="3" y1="6" x2="21" y2="6" stroke="white" strokeWidth="2" />
-                        <line x1="3" y1="12" x2="21" y2="12" stroke="white" strokeWidth="2" />
-                        <line x1="3" y1="18" x2="21" y2="18" stroke="white" strokeWidth="2" />
+                        <line x1="3" y1="6" x2="21" y2="6" stroke="#1f2937" strokeWidth="2" />
+                        <line x1="3" y1="12" x2="21" y2="12" stroke="#1f2937" strokeWidth="2" />
+                        <line x1="3" y1="18" x2="21" y2="18" stroke="#1f2937" strokeWidth="2" />
                     </svg>
                 </button>
             </div >
@@ -159,7 +159,7 @@ export function Navbar({ loading = false }) {
                 menuOpen && (
                     <div
                         onClick={() => setMenuOpen(false)}
-                        className="fixed inset-0 bg-black/60 z-30 md:hidden"
+                        className="fixed inset-0 bg-white/60 backdrop-blur-sm z-30 md:hidden"
                     />
                 )
             }
@@ -167,17 +167,17 @@ export function Navbar({ loading = false }) {
             {/* ---------------- MOBILE DRAWER ---------------- */}
             <div
                 ref={drawerRef}
-                className="fixed top-0 right-0 h-screen w-[50vw] bg-black z-40
-                   translate-x-full md:hidden flex flex-col gap-8 p-10 text-white text-2xl"
+                className="fixed top-0 right-0 h-screen w-[50vw] bg-white/95 backdrop-blur-md shadow-2xl z-40
+                   translate-x-full md:hidden flex flex-col gap-8 p-10 text-gray-700 text-2xl"
             >
                 <button
                     onClick={() => setMenuOpen(false)}
-                    className="self-end text-sm opacity-70"
+                    className="self-end text-sm text-gray-500 hover:text-gray-800"
                 >
                     Close ✕
                 </button>
 
-                <span className='text-center'>Home</span>
+                <span className='text-center hover:text-blue-500 cursor-pointer transition'>Home</span>
                 <span className='text-center'>About</span>
                 <span className='text-center'>Services</span>
                 <span className='text-center'>Blogs</span>
